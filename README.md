@@ -7,7 +7,7 @@ conceitual: https://app.brmodeloweb.com/#!/publicview/69d7c2cfe56bc192cf505ccc
 
 lógico: https://app.brmodeloweb.com/#!/publicview/69d7c36ce56bc192cf505d6b 
 
-##Streaming:
+## Streaming:
 
 conceitual: https://app.brmodeloweb.com/#!/publicview/69d7c1e0e56bc192cf505bd4
 
