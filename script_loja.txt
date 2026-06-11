@@ -163,3 +163,135 @@ MariaDB [loja]> select * from categoria;
 5 rows in set (0.001 sec)
 
 MariaDB [loja]>
+Microsoft Windows [versão 10.0.19045.5131]
+(c) Microsoft Corporation. Todos os direitos reservados.
+
+C:\Users\Aluno>cd C:\xampp\mysql\bin
+
+C:\xampp\mysql\bin>mysql -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 64
+Server version: 10.4.27-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use loja
+Database changed
+MariaDB [loja]> select * from categoria
+    -> ;
++--------------+-------------+
+| id_categoria | categoria   |
++--------------+-------------+
+|            1 | Eletrônicos |
+|            2 | Roupas      |
+|            3 | limpeza     |
+|            4 | Hortifruit  |
+|            5 | laticínios  |
++--------------+-------------+
+5 rows in set (0.001 sec)
+
+MariaDB [loja]> describe categoria
+    -> ;
++--------------+--------------+------+-----+---------+----------------+
+| Field        | Type         | Null | Key | Default | Extra          |
++--------------+--------------+------+-----+---------+----------------+
+| id_categoria | int(11)      | NO   | PRI | NULL    | auto_increment |
+| categoria    | varchar(255) | YES  |     | NULL    |                |
++--------------+--------------+------+-----+---------+----------------+
+2 rows in set (0.012 sec)
+
+MariaDB [loja]> describe produto;
++--------------+---------------+------+-----+---------+----------------+
+| Field        | Type          | Null | Key | Default | Extra          |
++--------------+---------------+------+-----+---------+----------------+
+| id_produto   | int(11)       | NO   | PRI | NULL    | auto_increment |
+| nome         | varchar(255)  | NO   |     | NULL    |                |
+| preco        | decimal(10,2) | NO   |     | NULL    |                |
+| quantidade   | int(11)       | YES  |     | NULL    |                |
+| marca        | varchar(255)  | NO   |     | NULL    |                |
+| observacoes  | varchar(255)  | YES  |     | NULL    |                |
+| id_categoria | int(11)       | YES  | MUL | NULL    |                |
+| datacadastro | date          | YES  |     | NULL    |                |
++--------------+---------------+------+-----+---------+----------------+
+8 rows in set (0.021 sec)
+
+MariaDB [loja]> insert into produto (nome,preco,quantidade,marca,observacoes,id_categoria,datacadastro) values ('notebook',3000.00,7,'acer',1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+MariaDB [loja]> insert into categoria (produto) values
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+MariaDB [loja]> insert into produto (nome,preco,quantidade,marca,observacoes,id_categoria,datacadastro) values
+    -> ('notebook',3000.00,7,'acer''8gb de ram',1,'2026-06-11');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+MariaDB [loja]> ('notebook', 3000.00, 7,'acer' '', 1, '2026-06-11');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''notebook', 3000.00, 7,'acer' '', 1, '2026-06-11')' at line 1
+MariaDB [loja]> ('notebook', 3000.00, 7,'acer', '', 1, '2026-06-11');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''notebook', 3000.00, 7,'acer', '', 1, '2026-06-11')' at line 1
+MariaDB [loja]> ('notebook',3000.00,7,'acer','',1,'2026-06-11');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''notebook',3000.00,7,'acer','',1,'2026-06-11')' at line 1
+MariaDB [loja]> insert into produto (nome,preco,quantidade,marca,observacoes,id_categoria,datacadastro) values
+    -> ('notebook',3000.00,7,'acer''8gb de ram',1,'2026-06-11');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+MariaDB [loja]> insert into produto (nome,preco,quantidade,marca,observacoes,id_categoria,datacadastro) values
+    -> ('notebook',3000.00,7,'acer','8gb de ram',1,'2026-06-11');
+Query OK, 1 row affected (0.013 sec)
+
+MariaDB [loja]> insert into produto (nome,preco,quantidade,marca,observacoes,id_categoria,datacadastro) values
+    -> ('tv',5000.00,5,'samsung','plasma',1,'2026-06-11'),
+    -> ('cropped',30.00,20,'adidas','',2,'2026-06-11'),
+    -> ('calça',90.00,15,'compton','baggy',2,'2026-06-11'),
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 4
+MariaDB [loja]> insert into produto (nome,preco,quantidade,marca,observacoes,id_categoria,datacadastro) values
+    -> ('tv',5000.00,5,'samsung','plasma',1,'2026-06-11'),
+    -> ('cropped',30.00,20,'adidas','',2,'2026-06-11'),
+    -> ('calça',90.00,15,'compton','baggy',2,'2026-06-11');
+Query OK, 3 rows affected (0.011 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+MariaDB [loja]> insert into produto (nome,preco,quantidade,marca,observacoes,id_categoria,datacadastro) values
+    -> ('água sanitária',10.00,22,'candida','',3,'2026-06-11',
+    -> ('sabão em pó',10.00,15,'omo','',3,'2026-06-11');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 3
+MariaDB [loja]> insert into produto (nome,preco,quantidade,marca,observacoes,id_categoria,datacadastro) values
+    -> ('sabão em pó',10.00,15,'omo','',3,'2026-06-11'),
+    -> ('água sanitária',10.00,22,'candida','',3,'2026-06-11');
+Query OK, 2 rows affected (0.014 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+MariaDB [loja]> insert into produto (nome,preco,quantidade,marca,observacoes,id_categoria,datacadastro) values
+    -> ('caqui',10.00,20,'não tem','preço por kilo',4,'2026-06-11'),
+    -> ('mexirica',10.00,20,'não tem','preço por kilo',4,'2026-06-11');
+Query OK, 2 rows affected (0.018 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+MariaDB [loja]> ('queijo',10.00,30,'seara','preço por kilo tipo minas',5,'2026-06-11'),
+    -> ('leite',7.85,30,'paulista','preço por litro',5,'2026-06-11');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''queijo',10.00,30,'seara','preço por kilo tipo minas',5,'2026-06-11'),
+('lei...' at line 1
+MariaDB [loja]> insert into produto (nome,preco,quantidade,marca,observacoes,id_categoria,datacadastro) values
+    -> ('queijo',10.00,30,'seara','preço por kilo tipo minas',5,'2026-06-11'),
+    -> ('leite',7.85,30,'paulista','preço por litro',5,'2026-06-11');
+Query OK, 2 rows affected (0.012 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+MariaDB [loja]> select *from produto;
++------------+----------------+---------+------------+----------+---------------------------+--------------+--------------+
+| id_produto | nome           | preco   | quantidade | marca    | observacoes               | id_categoria | datacadastro |
++------------+----------------+---------+------------+----------+---------------------------+--------------+--------------+
+|          1 | notebook       | 3000.00 |          7 | acer     | 8gb de ram                |            1 | 2026-06-11   |
+|          2 | tv             | 5000.00 |          5 | samsung  | plasma                    |            1 | 2026-06-11   |
+|          3 | cropped        |   30.00 |         20 | adidas   |                           |            2 | 2026-06-11   |
+|          4 | calça          |   90.00 |         15 | compton  | baggy                     |            2 | 2026-06-11   |
+|          5 | sabão em pó    |   10.00 |         15 | omo      |                           |            3 | 2026-06-11   |
+|          6 | água sanitária |   10.00 |         22 | candida  |                           |            3 | 2026-06-11   |
+|          7 | caqui          |   10.00 |         20 | não tem  | preço por kilo            |            4 | 2026-06-11   |
+|          8 | mexirica       |   10.00 |         20 | não tem  | preço por kilo            |            4 | 2026-06-11   |
+|          9 | queijo         |   10.00 |         30 | seara    | preço por kilo tipo minas |            5 | 2026-06-11   |
+|         10 | leite          |    7.85 |         30 | paulista | preço por litro           |            5 | 2026-06-11   |
++------------+----------------+---------+------------+----------+---------------------------+--------------+--------------+
+10 rows in set (0.001 sec)
+
+MariaDB [loja]>
