@@ -295,3 +295,263 @@ MariaDB [loja]> select *from produto;
 10 rows in set (0.001 sec)
 
 MariaDB [loja]>
+
+Microsoft Windows [versão 10.0.19045.5131]
+(c) Microsoft Corporation. Todos os direitos reservados.
+
+C:\Users\Aluno>cd C:\xampp\mysql\bin
+
+C:\xampp\mysql\bin>mysql -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 52
+Server version: 10.4.27-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use loja
+Database changed
+MariaDB [loja]> describe categoria
+    -> ;
++--------------+--------------+------+-----+---------+----------------+
+| Field        | Type         | Null | Key | Default | Extra          |
++--------------+--------------+------+-----+---------+----------------+
+| id_categoria | int(11)      | NO   | PRI | NULL    | auto_increment |
+| categoria    | varchar(255) | YES  |     | NULL    |                |
++--------------+--------------+------+-----+---------+----------------+
+2 rows in set (0.023 sec)
+
+MariaDB [loja]> describe produtos;
+ERROR 1146 (42S02): Table 'loja.produtos' doesn't exist
+MariaDB [loja]> describe produto;
++--------------+---------------+------+-----+---------+----------------+
+| Field        | Type          | Null | Key | Default | Extra          |
++--------------+---------------+------+-----+---------+----------------+
+| id_produto   | int(11)       | NO   | PRI | NULL    | auto_increment |
+| nome         | varchar(255)  | NO   |     | NULL    |                |
+| preco        | decimal(10,2) | NO   |     | NULL    |                |
+| quantidade   | int(11)       | YES  |     | NULL    |                |
+| marca        | varchar(255)  | NO   |     | NULL    |                |
+| observacoes  | varchar(255)  | YES  |     | NULL    |                |
+| id_categoria | int(11)       | YES  | MUL | NULL    |                |
+| datacadastro | date          | YES  |     | NULL    |                |
++--------------+---------------+------+-----+---------+----------------+
+8 rows in set (0.010 sec)
+
+MariaDB [loja]> select * from produto
+    -> ;
++------------+----------------+---------+------------+----------+---------------------------+--------------+--------------+
+| id_produto | nome           | preco   | quantidade | marca    | observacoes               | id_categoria | datacadastro |
++------------+----------------+---------+------------+----------+---------------------------+--------------+--------------+
+|          1 | notebook       | 3000.00 |          7 | acer     | 8gb de ram                |            1 | 2026-06-11   |
+|          2 | tv             | 5000.00 |          5 | samsung  | plasma                    |            1 | 2026-06-11   |
+|          3 | cropped        |   30.00 |         20 | adidas   |                           |            2 | 2026-06-11   |
+|          4 | calça          |   90.00 |         15 | compton  | baggy                     |            2 | 2026-06-11   |
+|          5 | sabão em pó    |   10.00 |         15 | omo      |                           |            3 | 2026-06-11   |
+|          6 | água sanitária |   10.00 |         22 | candida  |                           |            3 | 2026-06-11   |
+|          7 | caqui          |   10.00 |         20 | não tem  | preço por kilo            |            4 | 2026-06-11   |
+|          8 | mexirica       |   10.00 |         20 | não tem  | preço por kilo            |            4 | 2026-06-11   |
+|          9 | queijo         |   10.00 |         30 | seara    | preço por kilo tipo minas |            5 | 2026-06-11   |
+|         10 | leite          |    7.85 |         30 | paulista | preço por litro           |            5 | 2026-06-11   |
++------------+----------------+---------+------------+----------+---------------------------+--------------+--------------+
+10 rows in set (0.001 sec)
+
+MariaDB [loja]> select nome, preco from produtos;
+ERROR 1146 (42S02): Table 'loja.produtos' doesn't exist
+MariaDB [loja]> select nome, preco from produto;
++----------------+---------+
+| nome           | preco   |
++----------------+---------+
+| notebook       | 3000.00 |
+| tv             | 5000.00 |
+| cropped        |   30.00 |
+| calça          |   90.00 |
+| sabão em pó    |   10.00 |
+| água sanitária |   10.00 |
+| caqui          |   10.00 |
+| mexirica       |   10.00 |
+| queijo         |   10.00 |
+| leite          |    7.85 |
++----------------+---------+
+10 rows in set (0.001 sec)
+
+MariaDB [loja]> select * from produto where marca = 'não tem';
++------------+----------+-------+------------+---------+----------------+--------------+--------------+
+| id_produto | nome     | preco | quantidade | marca   | observacoes    | id_categoria | datacadastro |
++------------+----------+-------+------------+---------+----------------+--------------+--------------+
+|          7 | caqui    | 10.00 |         20 | não tem | preço por kilo |            4 | 2026-06-11   |
+|          8 | mexirica | 10.00 |         20 | não tem | preço por kilo |            4 | 2026-06-11   |
++------------+----------+-------+------------+---------+----------------+--------------+--------------+
+2 rows in set (0.001 sec)
+
+MariaDB [loja]> SELECT * FROM produto WHERE preco > 30;
++------------+----------+---------+------------+---------+-------------+--------------+--------------+
+| id_produto | nome     | preco   | quantidade | marca   | observacoes | id_categoria | datacadastro |
++------------+----------+---------+------------+---------+-------------+--------------+--------------+
+|          1 | notebook | 3000.00 |          7 | acer    | 8gb de ram  |            1 | 2026-06-11   |
+|          2 | tv       | 5000.00 |          5 | samsung | plasma      |            1 | 2026-06-11   |
+|          4 | calça    |   90.00 |         15 | compton | baggy       |            2 | 2026-06-11   |
++------------+----------+---------+------------+---------+-------------+--------------+--------------+
+3 rows in set (0.001 sec)
+
+MariaDB [loja]> SELECT * FROM produtos WHERE quantidade >= 10;
+ERROR 1146 (42S02): Table 'loja.produtos' doesn't exist
+MariaDB [loja]> SELECT * FROM produto WHERE quantidade >= 10;
++------------+----------------+-------+------------+----------+---------------------------+--------------+--------------+
+| id_produto | nome           | preco | quantidade | marca    | observacoes               | id_categoria | datacadastro |
++------------+----------------+-------+------------+----------+---------------------------+--------------+--------------+
+|          3 | cropped        | 30.00 |         20 | adidas   |                           |            2 | 2026-06-11   |
+|          4 | calça          | 90.00 |         15 | compton  | baggy                     |            2 | 2026-06-11   |
+|          5 | sabão em pó    | 10.00 |         15 | omo      |                           |            3 | 2026-06-11   |
+|          6 | água sanitária | 10.00 |         22 | candida  |                           |            3 | 2026-06-11   |
+|          7 | caqui          | 10.00 |         20 | não tem  | preço por kilo            |            4 | 2026-06-11   |
+|          8 | mexirica       | 10.00 |         20 | não tem  | preço por kilo            |            4 | 2026-06-11   |
+|          9 | queijo         | 10.00 |         30 | seara    | preço por kilo tipo minas |            5 | 2026-06-11   |
+|         10 | leite          |  7.85 |         30 | paulista | preço por litro           |            5 | 2026-06-11   |
++------------+----------------+-------+------------+----------+---------------------------+--------------+--------------+
+8 rows in set (0.001 sec)
+
+MariaDB [loja]> SELECT nome, preco FROM produtos ORDER BY preco ASC LIMIT 4;
+ERROR 1146 (42S02): Table 'loja.produtos' doesn't exist
+MariaDB [loja]> SELECT nome, preco FROM produto ORDER BY preco ASC LIMIT 4;
++----------------+-------+
+| nome           | preco |
++----------------+-------+
+| leite          |  7.85 |
+| sabão em pó    | 10.00 |
+| água sanitária | 10.00 |
+| caqui          | 10.00 |
++----------------+-------+
+4 rows in set (0.001 sec)
+
+MariaDB [loja]> SELECT nome, preco FROM produto ORDER BY preco DESC LIMIT 4;
++----------+---------+
+| nome     | preco   |
++----------+---------+
+| tv       | 5000.00 |
+| notebook | 3000.00 |
+| calça    |   90.00 |
+| cropped  |   30.00 |
++----------+---------+
+4 rows in set (0.001 sec)
+
+MariaDB [loja]> SELECT COUNT(*) AS total_produtos FROM produto;
++----------------+
+| total_produtos |
++----------------+
+|             10 |
++----------------+
+1 row in set (0.001 sec)
+
+MariaDB [loja]> SELECT AVG(preco) AS preco_medio FROM produto;
++-------------+
+| preco_medio |
++-------------+
+|  817.785000 |
++-------------+
+1 row in set (0.001 sec)
+
+MariaDB [loja]> SELECT nome, quantidade FROM produto ORDER BY quant DESC LIMIT 1;
+ERROR 1054 (42S22): Unknown column 'quant' in 'order clause'
+MariaDB [loja]> SELECT nome, quant FROM produto ORDER BY quant DESC LIMIT 1;
+ERROR 1054 (42S22): Unknown column 'quant' in 'field list'
+MariaDB [loja]> SELECT nome, quantidade FROM produto ORDER BY quant DESC LIMIT 1;
+ERROR 1054 (42S22): Unknown column 'quant' in 'order clause'
+MariaDB [loja]> SELECT nome, quantidade FROM produto ORDER BY quantidade DESC LIMIT 1;
++--------+------------+
+| nome   | quantidade |
++--------+------------+
+| queijo |         30 |
++--------+------------+
+1 row in set (0.001 sec)
+
+MariaDB [loja]> describe categorias;
+ERROR 1146 (42S02): Table 'loja.categorias' doesn't exist
+MariaDB [loja]> describe categoria;
++--------------+--------------+------+-----+---------+----------------+
+| Field        | Type         | Null | Key | Default | Extra          |
++--------------+--------------+------+-----+---------+----------------+
+| id_categoria | int(11)      | NO   | PRI | NULL    | auto_increment |
+| categoria    | varchar(255) | YES  |     | NULL    |                |
++--------------+--------------+------+-----+---------+----------------+
+2 rows in set (0.017 sec)
+
+MariaDB [loja]> describe  id_categoria;
+ERROR 1146 (42S02): Table 'loja.id_categoria' doesn't exist
+MariaDB [loja]> select * from categoria;
++--------------+-------------+
+| id_categoria | categoria   |
++--------------+-------------+
+|            1 | Eletrônicos |
+|            2 | Roupas      |
+|            3 | limpeza     |
+|            4 | Hortifruit  |
+|            5 | laticínios  |
++--------------+-------------+
+5 rows in set (0.001 sec)
+
+MariaDB [loja]> SELECT p.nome, c.categoria FROM produtos p JOIN categorias c ON p.id_categoria = c.id_categoria;
+ERROR 1146 (42S02): Table 'loja.produtos' doesn't exist
+MariaDB [loja]> SELECT p.nome, c.categoria FROM produto p JOIN categorias c ON p.id_categoria = c.id_categoria;
+ERROR 1146 (42S02): Table 'loja.categorias' doesn't exist
+MariaDB [loja]> SELECT p.nome, c.categoria FROM produto p JOIN categoria c ON p.id_categoria = c.id_categoria;
++----------------+-------------+
+| nome           | categoria   |
++----------------+-------------+
+| notebook       | Eletrônicos |
+| tv             | Eletrônicos |
+| cropped        | Roupas      |
+| calça          | Roupas      |
+| sabão em pó    | limpeza     |
+| água sanitária | limpeza     |
+| caqui          | Hortifruit  |
+| mexirica       | Hortifruit  |
+| queijo         | laticínios  |
+| leite          | laticínios  |
++----------------+-------------+
+10 rows in set (0.001 sec)
+
+MariaDB [loja]> SELECT p.nome, p.marca, p.preco FROM produtos p JOIN categoria c ON p.id_categoria = c.id_categoria WHERE c.categoria = 'Roupas';
+ERROR 1146 (42S02): Table 'loja.produtos' doesn't exist
+MariaDB [loja]> SELECT p.nome, p.marca, p.preco FROM produto p JOIN categoria c ON p.id_categoria = c.id_categoria WHERE c.categoria = 'Roupas';
++---------+---------+-------+
+| nome    | marca   | preco |
++---------+---------+-------+
+| cropped | adidas  | 30.00 |
+| calça   | compton | 90.00 |
++---------+---------+-------+
+2 rows in set (0.001 sec)
+
+MariaDB [loja]> SELECT c.categoria, COUNT(*) AS total_produtos FROM produto p JOIN categoria c ON p.id_categoria = c.id_categoria GROUP BY c.categoria;
++-------------+----------------+
+| categoria   | total_produtos |
++-------------+----------------+
+| Eletrônicos |              2 |
+| Hortifruit  |              2 |
+| laticínios  |              2 |
+| limpeza     |              2 |
+| Roupas      |              2 |
++-------------+----------------+
+5 rows in set (0.001 sec)
+
+MariaDB [loja]> rename table produto to produtos;
+Query OK, 0 rows affected (0.032 sec)
+
+MariaDB [loja]> describe produtos
+    -> ;
++--------------+---------------+------+-----+---------+----------------+
+| Field        | Type          | Null | Key | Default | Extra          |
++--------------+---------------+------+-----+---------+----------------+
+| id_produto   | int(11)       | NO   | PRI | NULL    | auto_increment |
+| nome         | varchar(255)  | NO   |     | NULL    |                |
+| preco        | decimal(10,2) | NO   |     | NULL    |                |
+| quantidade   | int(11)       | YES  |     | NULL    |                |
+| marca        | varchar(255)  | NO   |     | NULL    |                |
+| observacoes  | varchar(255)  | YES  |     | NULL    |                |
+| id_categoria | int(11)       | YES  | MUL | NULL    |                |
+| datacadastro | date          | YES  |     | NULL    |                |
++--------------+---------------+------+-----+---------+----------------+
+8 rows in set (0.022 sec)
+
+MariaDB [loja]>

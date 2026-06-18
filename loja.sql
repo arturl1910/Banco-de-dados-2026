@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 11-Jun-2026 às 17:28
+-- Tempo de geração: 18-Jun-2026 às 17:06
 -- Versão do servidor: 10.4.27-MariaDB
 -- versão do PHP: 8.0.25
 
@@ -48,10 +48,10 @@ INSERT INTO `categoria` (`id_categoria`, `categoria`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `produto`
+-- Estrutura da tabela `produtos`
 --
 
-CREATE TABLE `produto` (
+CREATE TABLE `produtos` (
   `id_produto` int(11) NOT NULL,
   `nome` varchar(255) NOT NULL,
   `preco` decimal(10,2) NOT NULL,
@@ -63,10 +63,10 @@ CREATE TABLE `produto` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `produto`
+-- Extraindo dados da tabela `produtos`
 --
 
-INSERT INTO `produto` (`id_produto`, `nome`, `preco`, `quantidade`, `marca`, `observacoes`, `id_categoria`, `datacadastro`) VALUES
+INSERT INTO `produtos` (`id_produto`, `nome`, `preco`, `quantidade`, `marca`, `observacoes`, `id_categoria`, `datacadastro`) VALUES
 (1, 'notebook', '3000.00', 7, 'acer', '8gb de ram', 1, '2026-06-11'),
 (2, 'tv', '5000.00', 5, 'samsung', 'plasma', 1, '2026-06-11'),
 (3, 'cropped', '30.00', 20, 'adidas', '', 2, '2026-06-11'),
@@ -89,9 +89,9 @@ ALTER TABLE `categoria`
   ADD PRIMARY KEY (`id_categoria`);
 
 --
--- Índices para tabela `produto`
+-- Índices para tabela `produtos`
 --
-ALTER TABLE `produto`
+ALTER TABLE `produtos`
   ADD PRIMARY KEY (`id_produto`),
   ADD KEY `id_categoria` (`id_categoria`);
 
@@ -106,9 +106,9 @@ ALTER TABLE `categoria`
   MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT de tabela `produto`
+-- AUTO_INCREMENT de tabela `produtos`
 --
-ALTER TABLE `produto`
+ALTER TABLE `produtos`
   MODIFY `id_produto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
@@ -116,10 +116,10 @@ ALTER TABLE `produto`
 --
 
 --
--- Limitadores para a tabela `produto`
+-- Limitadores para a tabela `produtos`
 --
-ALTER TABLE `produto`
-  ADD CONSTRAINT `produto_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_categoria`);
+ALTER TABLE `produtos`
+  ADD CONSTRAINT `produtos_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_categoria`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
